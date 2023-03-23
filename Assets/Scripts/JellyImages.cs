@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class JellyImages : MonoBehaviour
 {
     public static bool isDestroy = false;
-    [SerializeField] private bool isLockedActive = false;
+    [SerializeField]private bool isLockedActive = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {

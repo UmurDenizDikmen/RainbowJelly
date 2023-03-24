@@ -20,8 +20,7 @@ public class JellyImages : MonoBehaviour
             case "ActiveDeactiveLocked":
                 transform.GetChild(0).gameObject.SetActive(true);
                 GameManager.instance.jellyImagesList.Remove(gameObject);
-                GameManager.instance.jellyImagesList[0].transform.GetChild(0).gameObject.SetActive(false);
-                break;
+            break;
         }
     }
     private void ActivateLocked()
@@ -30,10 +29,12 @@ public class JellyImages : MonoBehaviour
         if (childObject.activeSelf)
         {
             isLockedActive = true;
+            GameManager.instance.jellyImagesList[0].transform.GetChild(0).gameObject.SetActive(false);
         }
     }
     private void Update()
     {
         ActivateLocked();
+      
     }
 }

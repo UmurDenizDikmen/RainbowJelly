@@ -15,7 +15,7 @@ public class JellyImages : MonoBehaviour
         {
             case "DestroyArea":
                 Destroy(gameObject);
-                isDestroy = true;
+               // isDestroy = true;
                 break;
             case "ActiveDeactiveLocked":
                 transform.GetChild(0).gameObject.SetActive(true);

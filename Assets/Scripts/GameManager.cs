@@ -4,30 +4,57 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-   [SerializeField]private Transform spawnPoint;
-   [SerializeField]private GameObject[] jellyImages;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject[] jellyImages;
+    public List<GameObject> jellyImagesList = new List<GameObject>();
+    [SerializeField] private GameObject [] orders;
 
-   public List<GameObject> jellyImagesList = new List<GameObject>();
+    [SerializeField] Transform orderPoint;
 
-   [SerializeField]private Transform panelParent;
+    public List<GameObject>orderList = new List<GameObject>();
 
-   public static GameManager instance;
+    public bool isOrderGiven = false;
+
+    [SerializeField] private Transform panelParent;
+
+    public static GameManager instance;
 
     private void Start()
     {
         instance = this;
+        InvokeRepeating("spawnJellyImage",4f,2f);
+       
+
+
     }
     private void Update()
     {
-        if(JellyImages.isDestroy == true)
+        /*if (JellyImages.isDestroy == true)
         {
-            var index = Random.Range(0,jellyImages.Length);
-            var newObjects = Instantiate(jellyImages[index],spawnPoint.transform.position,Quaternion.identity,panelParent);
+            var index = Random.Range(0, jellyImages.Length);
+            var newObjects = Instantiate(jellyImages[index], spawnPoint.transform.position, Quaternion.identity, panelParent);
             jellyImagesList.Add(newObjects);
             JellyImages.isDestroy = false;
 
+        }*/
+         if(isOrderGiven == false)
+         {
+            isOrderGiven = true;
+            int Index = Random.Range(0,orders.Length);
+            var newOrder = Instantiate(orders[Index],orderPoint.position,Quaternion.identity,orderPoint);
+            orderList.Add(newOrder.gameObject);
+            
+               
+            
         }
     }
-
+    private void spawnJellyImage()
+    { 
+        var index = Random.Range(0, jellyImages.Length);
+        var newObjects = Instantiate(jellyImages[index], spawnPoint.transform.position, Quaternion.identity, panelParent);
+        jellyImagesList.Add(newObjects);
+    }
    
+
+
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - DestroyArea
   - ActiveDeactiveLocked
+  - OrangeOrder
+  - GreenOrder
+  - PurpleOrder
   layers:
   - Default
   - TransparentFX

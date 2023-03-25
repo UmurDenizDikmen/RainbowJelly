@@ -18,14 +18,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform panelParent;
 
     public static GameManager instance;
-
-    private void Start()
+    
+    private void Awake()
     {
         instance = this;
-        InvokeRepeating("spawnJellyImage",4f,2f);
-       
-
-
+    }
+    private void Start()
+    {
+        
+        InvokeRepeating("spawnJellyImage",3f,2f);
     }
     private void Update()
     {

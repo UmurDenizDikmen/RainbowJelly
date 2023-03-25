@@ -20,12 +20,14 @@ public class OnTableJelly : MonoBehaviour
         green
 
     }
+    private void Start()
+    {
+        InvokeRepeating("ControlOrders",1.1f,2f);
+    }
     [SerializeField] private typeOfJelly jellyType;
     private void OnMouseDown()
     {
         var jellyImagesList = GameManager.instance.jellyImagesList;
-        var orderList = GameManager.instance.orderList;
-
         var firstJelly = jellyImagesList[0];
         var firstJellyColor = firstJelly.GetComponent<SpriteRenderer>().color;
         var jellyToRemove = firstJelly;
@@ -44,27 +46,12 @@ public class OnTableJelly : MonoBehaviour
                         transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[3];
                         jellyType = typeOfJelly.purple;
 
-                        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.purple && jellyType == typeOfJelly.purple)
-                        {
-                            transform.DOMove(orderPoint.position, 1f)
-                                .SetEase(Ease.InOutFlash)
-                                .OnComplete(() =>
-                                {
-                                    Destroy(gameObject);
-
-                                    var orderToRemove = orderList[0];
-                                    orderList.Remove(orderToRemove.gameObject);
-                                    Destroy(orderToRemove);
-
-                                    GameManager.instance.isOrderGiven = false;
-                                });
-                        }
                     });
             }
             else if (firstJellyColor == myColor[1])
             {
                 // Red jelly and yellow order
-              
+
                 firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
                     .SetEase(Ease.InOutFlash)
                     .OnComplete(() =>
@@ -75,21 +62,7 @@ public class OnTableJelly : MonoBehaviour
                         transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[4];
                         jellyType = typeOfJelly.orange;
 
-                        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.orange && jellyType == typeOfJelly.orange)
-                        {
-                            transform.DOMove(orderPoint.position, 1f)
-                                .SetEase(Ease.InOutFlash)
-                                .OnComplete(() =>
-                                {
-                                    Destroy(gameObject);
 
-                                    var orderToRemove = orderList[0];
-                                    orderList.Remove(orderToRemove.gameObject);
-                                    Destroy(orderToRemove);
-
-                                    GameManager.instance.isOrderGiven = false;
-                                });
-                        }
                     });
             }
         }
@@ -99,7 +72,7 @@ public class OnTableJelly : MonoBehaviour
             // Blue jelly and purple order
             if (firstJellyColor == myColor[0])
             {
-              
+
                 firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
                     .SetEase(Ease.InOutFlash)
                     .OnComplete(() =>
@@ -110,27 +83,13 @@ public class OnTableJelly : MonoBehaviour
                         transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[3];
                         jellyType = typeOfJelly.purple;
 
-                        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.purple && jellyType == typeOfJelly.purple)
-                        {
-                            transform.DOMove(orderPoint.position, 1f)
-                                .SetEase(Ease.InOutFlash)
-                                .OnComplete(() =>
-                                {
-                                    Destroy(gameObject);
 
-                                    var orderToRemove = orderList[0];
-                                    orderList.Remove(orderToRemove.gameObject);
-                                    Destroy(orderToRemove);
-
-                                    GameManager.instance.isOrderGiven = false;
-                                });
-                        }
                     });
             }
             else if (firstJellyColor == myColor[1])
             {
                 // Blue jelly and green order
-             
+
                 firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
                     .SetEase(Ease.InOutFlash)
                     .OnComplete(() =>
@@ -141,21 +100,7 @@ public class OnTableJelly : MonoBehaviour
                         transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[5];
                         jellyType = typeOfJelly.green;
 
-                        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.green && jellyType == typeOfJelly.green)
-                        {
-                            transform.DOMove(orderPoint.position, 1f)
-                                .SetEase(Ease.InOutFlash)
-                                .OnComplete(() =>
-                                {
-                                    Destroy(gameObject);
 
-                                    var orderToRemove = orderList[0];
-                                    orderList.Remove(orderToRemove.gameObject);
-                                    Destroy(orderToRemove);
-
-                                    GameManager.instance.isOrderGiven = false;
-                                });
-                        }
                     });
             }
         }
@@ -164,7 +109,7 @@ public class OnTableJelly : MonoBehaviour
             // yellow jelly and red order
             if (firstJellyColor == myColor[0])
             {
-              
+
                 firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
                     .SetEase(Ease.InOutFlash)
                     .OnComplete(() =>
@@ -175,21 +120,7 @@ public class OnTableJelly : MonoBehaviour
                         transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[4];
                         jellyType = typeOfJelly.orange;
 
-                        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.orange && jellyType == typeOfJelly.orange)
-                        {
-                            transform.DOMove(orderPoint.position, 1f)
-                                .SetEase(Ease.InOutFlash)
-                                .OnComplete(() =>
-                                {
-                                    Destroy(gameObject);
 
-                                    var orderToRemove = orderList[0];
-                                    orderList.Remove(orderToRemove.gameObject);
-                                    Destroy(orderToRemove);
-
-                                    GameManager.instance.isOrderGiven = false;
-                                });
-                        }
                     });
             }
             else if (firstJellyColor == myColor[2])
@@ -205,27 +136,65 @@ public class OnTableJelly : MonoBehaviour
                         transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[5];
                         jellyType = typeOfJelly.green;
 
-                        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.green && jellyType == typeOfJelly.green)
-                        {
-                            transform.DOMove(orderPoint.position, 1f)
-                                .SetEase(Ease.InOutFlash)
-                                .OnComplete(() =>
-                                {
-                                    Destroy(gameObject);
 
-                                    var orderToRemove = orderList[0];
-                                    orderList.Remove(orderToRemove.gameObject);
-                                    Destroy(orderToRemove);
-
-                                    GameManager.instance.isOrderGiven = false;
-                                });
-                        }
                     });
             }
         }
 
     }
-     private Vector3 GetPosition(Transform target)
+    private void ControlOrders()
+    {
+        var orderList = GameManager.instance.orderList;
+        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.green && jellyType == typeOfJelly.green)
+        {
+            transform.DOMove(orderPoint.position, 1f)
+                .SetEase(Ease.InOutFlash)
+                .OnComplete(() =>
+                {
+                    Destroy(gameObject);
+
+                    var orderToRemove = orderList[0];
+                    orderList.Remove(orderToRemove.gameObject);
+                    Destroy(orderToRemove);
+
+                    GameManager.instance.isOrderGiven = false;
+                });
+        }
+         
+        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.purple && jellyType == typeOfJelly.purple)
+        {
+            transform.DOMove(orderPoint.position, 1f)
+                .SetEase(Ease.InOutFlash)
+                .OnComplete(() =>
+                {
+                    Destroy(gameObject);
+
+                    var orderToRemove = orderList[0];
+                    orderList.Remove(orderToRemove.gameObject);
+                    Destroy(orderToRemove);
+
+                    GameManager.instance.isOrderGiven = false;
+                });
+        }
+        
+        if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.orange && jellyType == typeOfJelly.orange)
+        {
+            transform.DOMove(orderPoint.position, 1f)
+                .SetEase(Ease.InOutFlash)
+                .OnComplete(() =>
+                {
+                    Destroy(gameObject);
+
+                    var orderToRemove = orderList[0];
+                    orderList.Remove(orderToRemove.gameObject);
+                    Destroy(orderToRemove);
+
+                    GameManager.instance.isOrderGiven = false;
+                });
+        }
+
+    }
+    private Vector3 GetPosition(Transform target)
     {
         if (target.GetComponent<Transform>())
         {

@@ -6,10 +6,9 @@ using DG.Tweening;
 public class OnTableJelly : MonoBehaviour
 {
     [SerializeField] private Color[] myColor;
-    [SerializeField] private Transform panelMovePoint;
-
     [SerializeField] Transform orderPoint;
 
+    public bool isClickable = true;
     public enum typeOfJelly
     {
         red,
@@ -18,129 +17,74 @@ public class OnTableJelly : MonoBehaviour
         orange,
         purple,
         green
-
     }
     private void Start()
     {
-        InvokeRepeating("ControlOrders",1.1f,2f);
+        InvokeRepeating("ControlOrders", 1.1f, 2f);
+    }
+    private IEnumerator isClickableOnAgain()
+    {
+        yield return new WaitForSeconds(.5f);
+        isClickable = true;
     }
     [SerializeField] private typeOfJelly jellyType;
-    private void OnMouseDown()
+
+    private void JellyMove(int indexColor,int newIndexColor,typeOfJelly newJellyType,int secondIndexColor,int newIndexSecondColor,typeOfJelly newSecondJellyType)
     {
         var jellyImagesList = GameManager.instance.jellyImagesList;
         var firstJelly = jellyImagesList[0];
         var firstJellyColor = firstJelly.GetComponent<SpriteRenderer>().color;
         var jellyToRemove = firstJelly;
-        if (jellyType == typeOfJelly.red)
+            if (firstJellyColor == myColor[indexColor])
+            {
+                firstJelly.transform.DOMove(transform.position, 0.2f)
+                    .SetEase(Ease.InOutFlash)
+                    .OnComplete(() =>
+                    {
+                        jellyImagesList.Remove(jellyToRemove.gameObject);
+                        Destroy(jellyToRemove);
+                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexColor];
+                        jellyType = newJellyType;
+                    });
+            }
+            else if(firstJellyColor == myColor[secondIndexColor])
+            {
+                    firstJelly.transform.DOMove(transform.position, 0.2f)
+                    .SetEase(Ease.InOutFlash)
+                    .OnComplete(() =>
+                    {
+                        jellyImagesList.Remove(jellyToRemove.gameObject);
+                        Destroy(jellyToRemove);
+                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexSecondColor];
+                        jellyType = newSecondJellyType;
+                    });
+            }
+    }
+    private void OnMouseDown()
+    {
+        if (jellyType == typeOfJelly.red && isClickable == true)
         {
-            if (firstJellyColor == myColor[2])
-            {
-                // Red jelly and green order
-                firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[3];
-                        jellyType = typeOfJelly.purple;
-
-                    });
-            }
-            else if (firstJellyColor == myColor[1])
-            {
-                // Red jelly and yellow order
-
-                firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[4];
-                        jellyType = typeOfJelly.orange;
-
-
-                    });
-            }
+            isClickable = false;
+            StartCoroutine(isClickableOnAgain());
+            JellyMove(2,3,typeOfJelly.purple,1,4,typeOfJelly.orange);
+           
+            
         }
-
-        if (jellyType == typeOfJelly.blue)
+        if (jellyType == typeOfJelly.blue && isClickable == true)
         {
-            // Blue jelly and purple order
-            if (firstJellyColor == myColor[0])
-            {
+            isClickable = false;
+            StartCoroutine(isClickableOnAgain());
+            JellyMove(0,3,typeOfJelly.purple,1,5,typeOfJelly.green);
 
-                firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[3];
-                        jellyType = typeOfJelly.purple;
-
-
-                    });
-            }
-            else if (firstJellyColor == myColor[1])
-            {
-                // Blue jelly and green order
-
-                firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[5];
-                        jellyType = typeOfJelly.green;
-
-
-                    });
-            }
+          
         }
-        if (jellyType == typeOfJelly.yellow)
+        if (jellyType == typeOfJelly.yellow && isClickable == true)
         {
-            // yellow jelly and red order
-            if (firstJellyColor == myColor[0])
-            {
-
-                firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[4];
-                        jellyType = typeOfJelly.orange;
-
-
-                    });
-            }
-            else if (firstJellyColor == myColor[2])
-            {
-                // yellow jelly and green orderS
-                firstJelly.transform.DOMove(GetPosition(panelMovePoint), 0.7f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[5];
-                        jellyType = typeOfJelly.green;
-
-
-                    });
-            }
+            isClickable = false;
+            StartCoroutine(isClickableOnAgain());
+            JellyMove(0,4,typeOfJelly.orange,2,5,typeOfJelly.green);
+           
         }
-
     }
     private void ControlOrders()
     {
@@ -160,7 +104,7 @@ public class OnTableJelly : MonoBehaviour
                     GameManager.instance.isOrderGiven = false;
                 });
         }
-         
+
         if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.purple && jellyType == typeOfJelly.purple)
         {
             transform.DOMove(orderPoint.position, 1f)
@@ -176,7 +120,7 @@ public class OnTableJelly : MonoBehaviour
                     GameManager.instance.isOrderGiven = false;
                 });
         }
-        
+
         if (orderList[0].GetComponent<OrderObjects>().orderType == OrderObjects.typeOfOrder.orange && jellyType == typeOfJelly.orange)
         {
             transform.DOMove(orderPoint.position, 1f)
@@ -191,18 +135,6 @@ public class OnTableJelly : MonoBehaviour
 
                     GameManager.instance.isOrderGiven = false;
                 });
-        }
-
-    }
-    private Vector3 GetPosition(Transform target)
-    {
-        if (target.GetComponent<Transform>())
-        {
-            return target.GetComponent<Transform>().position;
-        }
-        else
-        {
-            return Vector3.zero;
         }
     }
 }

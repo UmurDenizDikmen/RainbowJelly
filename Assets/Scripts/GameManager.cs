@@ -25,8 +25,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        
-        InvokeRepeating("spawnJellyImage",3f,2f);
+        InvokeRepeating("spawnJellyImage",4f,2f);
     }
     private void Update()
     {
@@ -44,10 +43,7 @@ public class GameManager : MonoBehaviour
             int Index = Random.Range(0,orders.Length);
             var newOrder = Instantiate(orders[Index],orderPoint.position,Quaternion.identity,orderPoint);
             orderList.Add(newOrder.gameObject);
-            
-               
-            
-        }
+         }
     }
     private void spawnJellyImage()
     { 
@@ -55,7 +51,4 @@ public class GameManager : MonoBehaviour
         var newObjects = Instantiate(jellyImages[index], spawnPoint.transform.position, Quaternion.identity, panelParent);
         jellyImagesList.Add(newObjects);
     }
-   
-
-
 }

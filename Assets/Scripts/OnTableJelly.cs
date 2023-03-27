@@ -6,7 +6,7 @@ using DG.Tweening;
 public class OnTableJelly : MonoBehaviour
 {
     [SerializeField] private Color[] myColor;
-    [SerializeField] Transform orderPoint;
+    public Transform orderPoint;
 
     public bool isClickable = true;
     public enum typeOfJelly

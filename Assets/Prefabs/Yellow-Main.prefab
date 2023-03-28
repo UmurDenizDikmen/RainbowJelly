@@ -162,7 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000fa764ac0956a4ca72037fc3c65770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
 --- !u!114 &4827756924059182908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +183,20 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 0}
   isClickable: 1
+  targetColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
+  mergedColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
   jellyType: 2
 --- !u!1 &4827756925864420807
 GameObject:

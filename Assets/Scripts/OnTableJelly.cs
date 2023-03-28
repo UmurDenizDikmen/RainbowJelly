@@ -8,6 +8,11 @@ public class OnTableJelly : MonoBehaviour
     [SerializeField] private Color[] myColor;
     public Transform orderPoint;
     public bool isClickable = true;
+    [SerializeField] private Color[] targetColors;
+    [SerializeField] private Color[] mergedColors;
+
+   
+
     public enum typeOfJelly
     {
         red,
@@ -19,8 +24,8 @@ public class OnTableJelly : MonoBehaviour
     }
     private void Start()
     {
-        
-       InvokeRepeating("ControlOrders", 1.1f, 2f);
+
+        InvokeRepeating("ControlOrders", 1.1f, 2f);
     }
     private IEnumerator isClickableOnAgain()
     {
@@ -29,36 +34,36 @@ public class OnTableJelly : MonoBehaviour
     }
     [SerializeField] private typeOfJelly jellyType;
 
-    private void JellyMove(int indexColor,int newIndexColor,typeOfJelly newJellyType,int secondIndexColor,int newIndexSecondColor,typeOfJelly newSecondJellyType)
+    private void JellyMove(int indexColor, int newIndexColor, typeOfJelly newJellyType, int secondIndexColor, int newIndexSecondColor, typeOfJelly newSecondJellyType)
     {
         var jellyImagesList = GameManager.instance.jellyImagesList;
         var firstJelly = jellyImagesList[0];
         var firstJellyColor = firstJelly.GetComponent<SpriteRenderer>().color;
         var jellyToRemove = firstJelly;
-            if (firstJellyColor == myColor[indexColor])
+        if (firstJellyColor == myColor[indexColor])
+        {
+            firstJelly.transform.DOMove(transform.position, 0.2f)
+                .SetEase(Ease.InOutFlash)
+                .OnComplete(() =>
+                {
+                    jellyImagesList.Remove(jellyToRemove.gameObject);
+                    Destroy(jellyToRemove);
+                    transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexColor];
+                    jellyType = newJellyType;
+                });
+        }
+        else if (firstJellyColor == myColor[secondIndexColor])
+        {
+            firstJelly.transform.DOMove(transform.position, 0.2f)
+            .SetEase(Ease.InOutFlash)
+            .OnComplete(() =>
             {
-                firstJelly.transform.DOMove(transform.position, 0.2f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexColor];
-                        jellyType = newJellyType;
-                    });
-            }
-            else if(firstJellyColor == myColor[secondIndexColor])
-            {
-                    firstJelly.transform.DOMove(transform.position, 0.2f)
-                    .SetEase(Ease.InOutFlash)
-                    .OnComplete(() =>
-                    {
-                        jellyImagesList.Remove(jellyToRemove.gameObject);
-                        Destroy(jellyToRemove);
-                        transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexSecondColor];
-                        jellyType = newSecondJellyType;
-                    });
-            }
+                jellyImagesList.Remove(jellyToRemove.gameObject);
+                Destroy(jellyToRemove);
+                transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexSecondColor];
+                jellyType = newSecondJellyType;
+            });
+        }
     }
     private void OnMouseDown()
     {
@@ -66,28 +71,28 @@ public class OnTableJelly : MonoBehaviour
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
-            JellyMove(2,3,typeOfJelly.purple,1,4,typeOfJelly.orange);
-            ControlOrders();
-           
-            
+            JellyMove(2, 3, typeOfJelly.purple, 1, 4, typeOfJelly.orange);
+            // ControlOrders();
+
+
         }
         if (jellyType == typeOfJelly.blue && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
-            JellyMove(0,3,typeOfJelly.purple,1,5,typeOfJelly.green);
-            ControlOrders();
+            JellyMove(0, 3, typeOfJelly.purple, 1, 5, typeOfJelly.green);
+            // ControlOrders();
 
-          
+
         }
         if (jellyType == typeOfJelly.yellow && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
-            JellyMove(0,4,typeOfJelly.orange,2,5,typeOfJelly.green);
-            ControlOrders();
-            
-           
+            JellyMove(0, 4, typeOfJelly.orange, 2, 5, typeOfJelly.green);
+            //ControlOrders();
+
+
         }
     }
     private void ControlOrders()
@@ -104,7 +109,7 @@ public class OnTableJelly : MonoBehaviour
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);
-
+                    
                     GameManager.instance.isOrderGiven = false;
                 });
         }
@@ -120,7 +125,7 @@ public class OnTableJelly : MonoBehaviour
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);
-
+                  
                     GameManager.instance.isOrderGiven = false;
                 });
         }
@@ -136,11 +141,11 @@ public class OnTableJelly : MonoBehaviour
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);
-
                     GameManager.instance.isOrderGiven = false;
+                    
                 });
         }
-      
+
     }
 
 }

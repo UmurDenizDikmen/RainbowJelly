@@ -635,6 +635,8 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors: []
+  mergedColors: []
   jellyType: 1
 --- !u!1 &247583882
 GameObject:
@@ -791,6 +793,20 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
+  mergedColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
   jellyType: 1
 --- !u!1 &347924260
 GameObject:
@@ -1136,6 +1152,8 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors: []
+  mergedColors: []
   jellyType: 0
 --- !u!1 &444357841
 GameObject:
@@ -1292,6 +1310,20 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
+  mergedColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
   jellyType: 2
 --- !u!1 &476844891
 GameObject:
@@ -1681,6 +1713,8 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors: []
+  mergedColors: []
   jellyType: 0
 --- !u!1 &562311579
 GameObject:
@@ -1790,6 +1824,20 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
+  mergedColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.9843137, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.28627452, b: 1, a: 1}
+  - {r: 0.8967657, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.44950724, b: 0, a: 1}
+  - {r: 0.19430852, g: 1, b: 0, a: 1}
   jellyType: 0
 --- !u!61 &562311583
 BoxCollider2D:
@@ -2097,6 +2145,8 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors: []
+  mergedColors: []
   jellyType: 2
 --- !u!1 &894603776
 GameObject:
@@ -3329,6 +3379,8 @@ MonoBehaviour:
   - {r: 0.19430852, g: 1, b: 0, a: 1}
   orderPoint: {fileID: 1375180053}
   isClickable: 1
+  targetColors: []
+  mergedColors: []
   jellyType: 2
 --- !u!114 &1919130220
 MonoBehaviour:

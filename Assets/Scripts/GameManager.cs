@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
             ChangeGameState(GameState.InGame);
             return;
         }
-        if (isOrderGiven == false && State == GameState.InGame)
+        if (isOrderGiven == false)
         {
             isOrderGiven = true;
             int Index = UnityEngine.Random.Range(0, orders.Length);

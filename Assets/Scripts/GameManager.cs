@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
             var newOrder = Instantiate(orders[Index], orderPoint.position, Quaternion.identity, orderPoint);
             orderList.Add(newOrder.gameObject);
         }
+       
     }
     private void spawnJellyImage()
     {

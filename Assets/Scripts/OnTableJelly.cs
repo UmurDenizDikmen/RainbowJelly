@@ -7,7 +7,6 @@ public class OnTableJelly : MonoBehaviour
 {
     [SerializeField] private Color[] myColor;
     public Transform orderPoint;
-
     public bool isClickable = true;
     public enum typeOfJelly
     {
@@ -21,7 +20,7 @@ public class OnTableJelly : MonoBehaviour
     private void Start()
     {
         GameManager.OnStateChanged += OnstateChanged;
-      //  InvokeRepeating("ControlOrders", 1.1f, 2f);
+      
     }
     private IEnumerator isClickableOnAgain()
     {
@@ -137,6 +136,7 @@ public class OnTableJelly : MonoBehaviour
                     GameManager.instance.isOrderGiven = false;
                 });
         }
+      
     }
     private void OnstateChanged(GameState newState)
     {

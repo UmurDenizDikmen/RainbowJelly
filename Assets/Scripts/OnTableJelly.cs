@@ -10,9 +10,6 @@ public class OnTableJelly : MonoBehaviour
     public bool isClickable = true;
     [SerializeField] private Color[] targetColors;
     [SerializeField] private Color[] mergedColors;
-
-   
-
     public enum typeOfJelly
     {
         red,
@@ -145,7 +142,6 @@ public class OnTableJelly : MonoBehaviour
                     
                 });
         }
-
     }
 
 }

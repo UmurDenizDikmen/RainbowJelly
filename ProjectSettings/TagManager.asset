@@ -9,6 +9,7 @@ TagManager:
   - OrangeOrder
   - GreenOrder
   - PurpleOrder
+  - Locked
   layers:
   - Default
   - TransparentFX

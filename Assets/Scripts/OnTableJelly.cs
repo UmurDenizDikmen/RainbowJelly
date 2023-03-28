@@ -62,7 +62,7 @@ public class OnTableJelly : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (jellyType == typeOfJelly.red && isClickable == true)
+        if (jellyType == typeOfJelly.red && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
@@ -70,7 +70,7 @@ public class OnTableJelly : MonoBehaviour
            
             
         }
-        if (jellyType == typeOfJelly.blue && isClickable == true)
+        if (jellyType == typeOfJelly.blue && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
@@ -78,7 +78,7 @@ public class OnTableJelly : MonoBehaviour
 
           
         }
-        if (jellyType == typeOfJelly.yellow && isClickable == true)
+        if (jellyType == typeOfJelly.yellow && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());

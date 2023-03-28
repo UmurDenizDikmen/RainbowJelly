@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        InvokeRepeating("spawnJellyImage",4f,2f);
+        InvokeRepeating("spawnJellyImage",5.7f,2f);
     }
     private void Update()
     {

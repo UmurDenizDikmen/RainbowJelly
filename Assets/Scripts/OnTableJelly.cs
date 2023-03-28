@@ -8,8 +8,6 @@ public class OnTableJelly : MonoBehaviour
     [SerializeField] private Color[] myColor;
     public Transform orderPoint;
     public bool isClickable = true;
-    [SerializeField] private Color[] targetColors;
-    [SerializeField] private Color[] mergedColors;
     public enum typeOfJelly
     {
         red,
@@ -69,27 +67,18 @@ public class OnTableJelly : MonoBehaviour
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
             JellyMove(2, 3, typeOfJelly.purple, 1, 4, typeOfJelly.orange);
-            // ControlOrders();
-
-
         }
         if (jellyType == typeOfJelly.blue && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
             JellyMove(0, 3, typeOfJelly.purple, 1, 5, typeOfJelly.green);
-            // ControlOrders();
-
-
         }
         if (jellyType == typeOfJelly.yellow && isClickable == true && gameObject.transform.childCount == 0)
         {
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
             JellyMove(0, 4, typeOfJelly.orange, 2, 5, typeOfJelly.green);
-            //ControlOrders();
-
-
         }
     }
     private void ControlOrders()
@@ -102,11 +91,9 @@ public class OnTableJelly : MonoBehaviour
                 .OnComplete(() =>
                 {
                     Destroy(gameObject);
-
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);
-                    
                     GameManager.instance.isOrderGiven = false;
                 });
         }
@@ -118,11 +105,9 @@ public class OnTableJelly : MonoBehaviour
                 .OnComplete(() =>
                 {
                     Destroy(gameObject);
-
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);
-                  
                     GameManager.instance.isOrderGiven = false;
                 });
         }
@@ -134,7 +119,6 @@ public class OnTableJelly : MonoBehaviour
                 .OnComplete(() =>
                 {
                     Destroy(gameObject);
-
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);

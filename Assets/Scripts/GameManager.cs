@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] jellyImages;
     public List<GameObject> jellyImagesList = new List<GameObject>();
+    public List<GameObject> tableObjects = new List<GameObject>();
     [SerializeField] private GameObject[] orders;
 
     [SerializeField] Transform orderPoint;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
             var newOrder = Instantiate(orders[Index], orderPoint.position, Quaternion.identity, orderPoint);
             orderList.Add(newOrder.gameObject);
         }
-       
+
     }
     private void spawnJellyImage()
     {
@@ -53,14 +54,22 @@ public class GameManager : MonoBehaviour
         var newObjects = Instantiate(jellyImages[index], spawnPoint.transform.position, Quaternion.identity, panelParent);
         jellyImagesList.Add(newObjects);
         ImageMovement.speed = 1f;
+
+
+
     }
     public void ChangeGameState(GameState newState)
     {
         switch (newState)
         {
             case GameState.InGame:
-            InvokeRepeating("spawnJellyImage", 5.7f, 2f);
-            break;
+                InvokeRepeating("spawnJellyImage", 5.7f, 2f);
+                break;
+            case GameState.Fail:
+                CancelInvoke("spawnJellyImage");
+                break;
+
+
         }
         OnStateChanged?.Invoke(newState);
         State = newState;

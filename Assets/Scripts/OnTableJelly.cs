@@ -19,8 +19,8 @@ public class OnTableJelly : MonoBehaviour
     }
     private void Start()
     {
-        GameManager.OnStateChanged += OnstateChanged;
-      
+        
+       InvokeRepeating("ControlOrders", 1.1f, 2f);
     }
     private IEnumerator isClickableOnAgain()
     {
@@ -67,6 +67,7 @@ public class OnTableJelly : MonoBehaviour
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
             JellyMove(2,3,typeOfJelly.purple,1,4,typeOfJelly.orange);
+            ControlOrders();
            
             
         }
@@ -75,6 +76,7 @@ public class OnTableJelly : MonoBehaviour
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
             JellyMove(0,3,typeOfJelly.purple,1,5,typeOfJelly.green);
+            ControlOrders();
 
           
         }
@@ -83,6 +85,8 @@ public class OnTableJelly : MonoBehaviour
             isClickable = false;
             StartCoroutine(isClickableOnAgain());
             JellyMove(0,4,typeOfJelly.orange,2,5,typeOfJelly.green);
+            ControlOrders();
+            
            
         }
     }
@@ -138,13 +142,5 @@ public class OnTableJelly : MonoBehaviour
         }
       
     }
-    private void OnstateChanged(GameState newState)
-    {
-        switch(newState)
-        {
-               case GameState.InGame :
-                 InvokeRepeating("ControlOrders", 1.1f, 2f);
-               break;
-        }
-    }
+
 }

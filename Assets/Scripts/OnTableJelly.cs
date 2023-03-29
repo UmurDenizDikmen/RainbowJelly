@@ -35,7 +35,7 @@ public class OnTableJelly : MonoBehaviour
         var jellyToRemove = firstJelly;
         isClickable = false;
         StartCoroutine(isClickableOnAgain());
-        if (firstJellyColor == myColor[indexColor])
+        if (firstJellyColor == myColor[indexColor]&&jellyImagesList.Count > 0)
         {
             firstJelly.transform.DOMove(transform.position, 0.2f)
                 .SetEase(Ease.InOutFlash)
@@ -49,7 +49,7 @@ public class OnTableJelly : MonoBehaviour
                     isFailorGo();
                 });
         }
-        else if (firstJellyColor == myColor[secondIndexColor])
+        else if (firstJellyColor == myColor[secondIndexColor]&&jellyImagesList.Count > 0)
         {
             firstJelly.transform.DOMove(transform.position, 0.2f)
             .SetEase(Ease.InOutFlash)

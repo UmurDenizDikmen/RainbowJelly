@@ -4,16 +4,12 @@ using DG.Tweening;
 using UnityEngine;
 
 public class OrderObjects : MonoBehaviour
-{
+{   
     public enum typeOfOrder
-    {
-
+    {   
         orange,
         purple,
         green
-
     }
     public  typeOfOrder orderType; 
-   
-
 }

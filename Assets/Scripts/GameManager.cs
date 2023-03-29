@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-
         State = GameState.Start;
     }
     private void Update()
@@ -46,7 +45,6 @@ public class GameManager : MonoBehaviour
             var newOrder = Instantiate(orders[Index], orderPoint.position, Quaternion.identity, orderPoint);
             orderList.Add(newOrder.gameObject);
         }
-
     }
     private void spawnJellyImage()
     {
@@ -54,9 +52,6 @@ public class GameManager : MonoBehaviour
         var newObjects = Instantiate(jellyImages[index], spawnPoint.transform.position, Quaternion.identity, panelParent);
         jellyImagesList.Add(newObjects);
         ImageMovement.speed = 1f;
-
-
-
     }
     public void ChangeGameState(GameState newState)
     {
@@ -66,16 +61,13 @@ public class GameManager : MonoBehaviour
                 tableObjects.Capacity = 3;
                 break;
             case GameState.InGame:
-                InvokeRepeating("spawnJellyImage", 5.7f, 2f);
+                InvokeRepeating("spawnJellyImage", 7.5f, 2f);
                 break;
             case GameState.Fail:
                 CancelInvoke("spawnJellyImage");
                 break;
-
-
         }
         OnStateChanged?.Invoke(newState);
         State = newState;
-
     }
 }

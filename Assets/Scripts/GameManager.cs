@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
     {
         switch (newState)
         {
+            case GameState.Start:
+                tableObjects.Capacity = 3;
+                break;
             case GameState.InGame:
                 InvokeRepeating("spawnJellyImage", 5.7f, 2f);
                 break;

@@ -269,8 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRenderer:
   - {fileID: 21300000, guid: 57bc696a00e12334293e08e68488846a, type: 3}
-  - {fileID: 21300000, guid: da3bfbbda642b03459d4f3f33f39e063, type: 3}
   - {fileID: 21300000, guid: f76b046b957decf4fa235d4df420fd8d, type: 3}
+  - {fileID: 21300000, guid: da3bfbbda642b03459d4f3f33f39e063, type: 3}
   - {fileID: 21300000, guid: 5388c244f41315a4e8ae3dd746ff610f, type: 3}
   - {fileID: 21300000, guid: bd0f6fdba660a294d980532ddf93ff1a, type: 3}
   - {fileID: 21300000, guid: 210297afe2bebeb4eaf70adab01d9aa2, type: 3}

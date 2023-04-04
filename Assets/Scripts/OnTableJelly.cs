@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class OnTableJelly : MonoBehaviour
 {
-    [SerializeField] private Color[] myColor;
+    [SerializeField]private Sprite []myRenderer;
+   // [SerializeField] private Color[] myColor;
     public Transform orderPoint;
     public bool isClickable = true;
     public enum typeOfJelly
@@ -20,6 +21,7 @@ public class OnTableJelly : MonoBehaviour
     [SerializeField] private typeOfJelly jellyType;
     private void Start()
     {
+
         InvokeRepeating("ControlOrders", 1.1f, 2f);
     }
     private IEnumerator isClickableOnAgain()
@@ -31,11 +33,11 @@ public class OnTableJelly : MonoBehaviour
     {
         var jellyImagesList = GameManager.instance.jellyImagesList;
         var firstJelly = jellyImagesList[0];
-        var firstJellyColor = firstJelly.GetComponent<SpriteRenderer>().color;
+        var firstJellyColor = firstJelly.GetComponent<SpriteRenderer>().sprite;
         var jellyToRemove = firstJelly;
         isClickable = false;
         StartCoroutine(isClickableOnAgain());
-        if (firstJellyColor == myColor[indexColor]&&jellyImagesList.Count > 0)
+        if (firstJellyColor ==myRenderer[indexColor]&&jellyImagesList.Count > 0)
         {
             firstJelly.transform.DOMove(transform.position, 0.2f)
                 .SetEase(Ease.InOutFlash)
@@ -43,13 +45,13 @@ public class OnTableJelly : MonoBehaviour
                 {
                     jellyImagesList.Remove(jellyToRemove.gameObject);
                     Destroy(jellyToRemove);
-                    transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexColor];
+                    transform.gameObject.GetComponent<SpriteRenderer>().sprite = myRenderer[newIndexColor];
                     jellyType = newJellyType;
                     GameManager.instance.tableObjects.Add(transform.gameObject);
                     isFailorGo();
                 });
         }
-        else if (firstJellyColor == myColor[secondIndexColor]&&jellyImagesList.Count > 0)
+        else if (firstJellyColor == myRenderer[secondIndexColor]&&jellyImagesList.Count > 0)
         {
             firstJelly.transform.DOMove(transform.position, 0.2f)
             .SetEase(Ease.InOutFlash)
@@ -57,7 +59,7 @@ public class OnTableJelly : MonoBehaviour
             {
                 jellyImagesList.Remove(jellyToRemove.gameObject);
                 Destroy(jellyToRemove);
-                transform.gameObject.GetComponent<SpriteRenderer>().color = myColor[newIndexSecondColor];
+                transform.gameObject.GetComponent<SpriteRenderer>().sprite = myRenderer[newIndexSecondColor];
                 jellyType = newSecondJellyType;
                 GameManager.instance.tableObjects.Add(transform.gameObject);
                 isFailorGo();

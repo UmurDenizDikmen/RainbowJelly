@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
                 tableObjects.Capacity = 3;
                 break;
             case GameState.InGame:
-                InvokeRepeating("spawnJellyImage", 7.5f, 2f);
+                InvokeRepeating("spawnJellyImage", .1f, 2.2f);
                 break;
             case GameState.Fail:
                 CancelInvoke("spawnJellyImage");

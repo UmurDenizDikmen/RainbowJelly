@@ -5,8 +5,10 @@ using DG.Tweening;
 
 public class OnTableJelly : MonoBehaviour
 {
-    [SerializeField]private Sprite []myRenderer;
-   // [SerializeField] private Color[] myColor;
+    [SerializeField] private Sprite[] myRenderer;
+
+    Animator anim;
+    // [SerializeField] private Color[] myColor;
     public Transform orderPoint;
     public bool isClickable = true;
     public enum typeOfJelly
@@ -23,6 +25,7 @@ public class OnTableJelly : MonoBehaviour
     {
 
         InvokeRepeating("ControlOrders", 1.1f, 2f);
+        anim = GetComponent<Animator>();
     }
     private IEnumerator isClickableOnAgain()
     {
@@ -37,7 +40,7 @@ public class OnTableJelly : MonoBehaviour
         var jellyToRemove = firstJelly;
         isClickable = false;
         StartCoroutine(isClickableOnAgain());
-        if (firstJellyColor ==myRenderer[indexColor]&&jellyImagesList.Count > 0)
+        if (firstJellyColor == myRenderer[indexColor] && jellyImagesList.Count > 0)
         {
             firstJelly.transform.DOMove(transform.position, 0.2f)
                 .SetEase(Ease.InOutFlash)
@@ -48,10 +51,14 @@ public class OnTableJelly : MonoBehaviour
                     transform.gameObject.GetComponent<SpriteRenderer>().sprite = myRenderer[newIndexColor];
                     jellyType = newJellyType;
                     GameManager.instance.tableObjects.Add(transform.gameObject);
+                    Vector3 originalScale = transform.localScale;
+                    transform.DOScaleY(transform.localScale.y - 0.2f, 0.15f)
+                    .OnComplete(() => transform.DOScale(originalScale, 0.15f));
+
                     isFailorGo();
                 });
         }
-        else if (firstJellyColor == myRenderer[secondIndexColor]&&jellyImagesList.Count > 0)
+        else if (firstJellyColor == myRenderer[secondIndexColor] && jellyImagesList.Count > 0)
         {
             firstJelly.transform.DOMove(transform.position, 0.2f)
             .SetEase(Ease.InOutFlash)
@@ -62,24 +69,32 @@ public class OnTableJelly : MonoBehaviour
                 transform.gameObject.GetComponent<SpriteRenderer>().sprite = myRenderer[newIndexSecondColor];
                 jellyType = newSecondJellyType;
                 GameManager.instance.tableObjects.Add(transform.gameObject);
+                Vector3 originalScale = transform.localScale;
+                transform.DOScaleY(transform.localScale.y - 0.2f, 0.15f)
+                .OnComplete(() => transform.DOScale(originalScale, 0.15f));
                 isFailorGo();
+
 
             });
         }
     }
     private void OnMouseDown()
     {
-        if (jellyType == typeOfJelly.red && isClickable == true && gameObject.transform.childCount == 0)
+
+        if (jellyType == typeOfJelly.red && isClickable == true && gameObject.transform.childCount == 1)
         {
             JellyMove(2, 3, typeOfJelly.purple, 1, 4, typeOfJelly.orange);
+
         }
-        if (jellyType == typeOfJelly.blue && isClickable == true && gameObject.transform.childCount == 0)
+        if (jellyType == typeOfJelly.blue && isClickable == true && gameObject.transform.childCount == 1)
         {
             JellyMove(0, 3, typeOfJelly.purple, 1, 5, typeOfJelly.green);
+
         }
-        if (jellyType == typeOfJelly.yellow && isClickable == true && gameObject.transform.childCount == 0)
+        if (jellyType == typeOfJelly.yellow && isClickable == true && gameObject.transform.childCount == 1)
         {
             JellyMove(0, 4, typeOfJelly.orange, 2, 5, typeOfJelly.green);
+
         }
     }
     private void isFailorGo()
@@ -96,11 +111,19 @@ public class OnTableJelly : MonoBehaviour
 
         if (orderList.Count > 0 && orderList[0].GetComponent<OrderObjects>().orderType.ToString() == jellyType.ToString())
         {
+            transform.GetComponent<SpriteRenderer>().sortingOrder = 2;
             GameManager.instance.tableObjects.Remove(transform.gameObject);
-            transform.DOMove(orderPoint.position, 1f)
+            transform.DOMove(orderPoint.position, 1.5f)
                 .SetEase(Ease.InOutFlash)
+                .OnStart(() =>
+                {
+
+                    transform.DOScale(Vector3.zero, 1.5f).SetEase(Ease.InOutFlash);
+                    transform.GetChild(0).gameObject.SetActive(true);
+                })
                 .OnComplete(() =>
                 {
+
                     Destroy(gameObject);
                     var orderToRemove = orderList[0];
                     orderList.Remove(orderToRemove.gameObject);
@@ -108,6 +131,5 @@ public class OnTableJelly : MonoBehaviour
                     GameManager.instance.isOrderGiven = false;
                 });
         }
-
     }
 }

@@ -29,7 +29,7 @@ public class PlateControl : MonoBehaviour
 
                         firstJelly.GetComponent<OnTableJelly>().enabled = true;
                         firstJelly.GetComponent<OnTableJelly>().orderPoint = orderPoint;
-                        Destroy(firstJelly.transform.GetChild(0).gameObject);
+                        Destroy(firstJelly.transform.GetChild(1).gameObject);
                     });
         }
     }

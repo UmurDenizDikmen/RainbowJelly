@@ -7,7 +7,7 @@ public class TableMovement : MonoBehaviour
     [SerializeField] private Transform rotationCenter;
     private float angularSpeed;
 
-    private float rotationRadius =2f;
+    private float rotationRadius = 1.8f;
     private float angle = 0;
 
     private void Start()
@@ -35,21 +35,21 @@ public class TableMovement : MonoBehaviour
         {
             case GameState.Start:
                 angularSpeed = 0f;
-              
+
                 break;
             case GameState.InGame:
                 angularSpeed = 100f;
-              
+
                 break;
 
             case GameState.Success:
                angularSpeed = 0f;
-                
+
                 break;
 
             case GameState.Fail:
               angularSpeed = 0;
-              
+
                 break;
 
         }

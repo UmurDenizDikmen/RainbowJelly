@@ -129,6 +129,11 @@ public class OnTableJelly : MonoBehaviour
                     orderList.Remove(orderToRemove.gameObject);
                     Destroy(orderToRemove);
                     GameManager.instance.isOrderGiven = false;
+                    GameManager.instance.OrderCount--;
+                    if(GameManager.instance.OrderCount == 0)
+                    {
+                        GameManager.instance.ChangeGameState(GameState.Success);
+                    }
                 });
         }
     }

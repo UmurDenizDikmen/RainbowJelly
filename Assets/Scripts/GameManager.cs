@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> jellyImagesList = new List<GameObject>();
     public List<GameObject> tableObjects = new List<GameObject>();
     [SerializeField] private GameObject[] orders;
-
+    public static event Action onOrderCountChange;
     [SerializeField] Transform orderPoint;
-
+    private int orderCount = 3;
     public List<GameObject> orderList = new List<GameObject>();
 
     public bool isOrderGiven = false;
@@ -30,6 +30,18 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         State = GameState.Start;
+    }
+    public int OrderCount
+    {
+        get
+        {
+            return orderCount;
+        }
+        set
+        {
+            orderCount = value;
+            onOrderCountChange?.Invoke();
+        }
     }
     private void Update()
     {
@@ -62,6 +74,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.InGame:
                 InvokeRepeating("spawnJellyImage", .1f, 2.2f);
+                break;
+            case GameState.Success :
+                orderCount++;
+                CancelInvoke("spawnJellyImage");
                 break;
             case GameState.Fail:
                 CancelInvoke("spawnJellyImage");

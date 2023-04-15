@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+using System.Security;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] orders;
     public static event Action onOrderCountChange;
     [SerializeField] Transform orderPoint;
-    private int orderCount = 3;
+    private int orderCount;
     public List<GameObject> orderList = new List<GameObject>();
 
     public bool isOrderGiven = false;
@@ -29,7 +32,8 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        State = GameState.Start;
+        ChangeGameState(GameState.Start);
+
     }
     public int OrderCount
     {
@@ -41,15 +45,18 @@ public class GameManager : MonoBehaviour
         {
             orderCount = value;
             onOrderCountChange?.Invoke();
+            if (OrderCount == 0)
+            {
+                ChangeGameState(GameState.Success);
+                OrderCount++;
+
+
+            }
         }
     }
     private void Update()
     {
-        if (State == GameState.Start && Input.GetMouseButtonDown(0))
-        {
-            ChangeGameState(GameState.InGame);
-            return;
-        }
+
         if (isOrderGiven == false)
         {
             isOrderGiven = true;
@@ -57,7 +64,21 @@ public class GameManager : MonoBehaviour
             var newOrder = Instantiate(orders[Index], orderPoint.position, Quaternion.identity, orderPoint);
             orderList.Add(newOrder.gameObject);
         }
+
     }
+    public void StartGameButton()
+    {
+        if (State == GameState.Start)
+        {
+            ChangeGameState(GameState.InGame);
+            return;
+        }
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private void spawnJellyImage()
     {
         var index = UnityEngine.Random.Range(0, jellyImages.Length);
@@ -71,12 +92,13 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Start:
                 tableObjects.Capacity = 3;
+                 OrderCount=3;
                 break;
             case GameState.InGame:
-                InvokeRepeating("spawnJellyImage", .1f, 2.2f);
+                InvokeRepeating("spawnJellyImage", .5f, 3.2f);
                 break;
-            case GameState.Success :
-                orderCount++;
+            case GameState.Success:
+                OrderCount++;
                 CancelInvoke("spawnJellyImage");
                 break;
             case GameState.Fail:

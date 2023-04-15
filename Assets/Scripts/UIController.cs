@@ -8,6 +8,9 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject failPanel;
     [SerializeField] private GameObject successPanel;
+    [SerializeField] private GameObject inGamePanel;
+    [SerializeField] private GameObject buttonplay;
+    [SerializeField] private Animator succesPanelAnim;
     public TextMeshProUGUI orderCountText;
     [SerializeField] private TextMeshProUGUI levelCountText;
 
@@ -15,13 +18,19 @@ public class UIController : MonoBehaviour
     {
         GameManager.OnStateChanged += OnstateChanged;
         GameManager.onOrderCountChange += OnOrderCountChange;
-        levelCountText.text = PlayerPrefs.GetInt("levelnumber", 1).ToString();
+        levelCountText.text = PlayerPrefs.GetInt("levelnumber",SaveManager.instance.levelNumber).ToString();
+
+    }
+    private void OnDisable()
+    {
+        GameManager.OnStateChanged -= OnstateChanged;
 
     }
     private void OnOrderCountChange()
     {
         orderCountText.text = GameManager.instance.OrderCount.ToString();
     }
+
     private void OnstateChanged(GameState newState)
     {
         switch (newState)
@@ -29,20 +38,27 @@ public class UIController : MonoBehaviour
             case GameState.Start:
                 successPanel.SetActive(false);
                 failPanel.SetActive(false);
+                inGamePanel.SetActive(true);
+                levelCountText.text = PlayerPrefs.GetInt("levelnumber",SaveManager.instance.levelNumber).ToString();
                 break;
             case GameState.InGame:
                 successPanel.SetActive(false);
                 failPanel.SetActive(false);
+                inGamePanel.SetActive(true);
+                buttonplay.SetActive(false);
                 break;
             case GameState.Success:
                 successPanel.SetActive(true);
+                succesPanelAnim.Play("idle");
                 failPanel.SetActive(false);
-                levelCountText.text = PlayerPrefs.GetInt("levelnumber").ToString();
+                inGamePanel.SetActive(false);
+                levelCountText.text = PlayerPrefs.GetInt("levelnumber",SaveManager.instance.levelNumber).ToString();
                 break;
-
             case GameState.Fail:
                 successPanel.SetActive(false);
                 failPanel.SetActive(true);
+                inGamePanel.SetActive(true);
+                buttonplay.SetActive(false);
                 break;
         }
     }

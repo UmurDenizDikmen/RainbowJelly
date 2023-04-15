@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class JellyImages : MonoBehaviour
 {
-    [SerializeField]private bool isLockedActive = false;
-
     private void OnTriggerEnter2D(Collider2D other)
     {
 
@@ -16,23 +14,19 @@ public class JellyImages : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "ActiveDeactiveLocked":
-                transform.GetChild(1).gameObject.SetActive(true);
+                transform.GetChild(1).gameObject.SetActive(false);
                 GameManager.instance.jellyImagesList.Remove(gameObject);
-            break;
-        }
-    }
-    private void ActivateLocked()
-    {
-        var childObject = transform.GetChild(1).gameObject;
-        if (childObject.activeSelf)
-        {
-            isLockedActive = true;
-            GameManager.instance.jellyImagesList[0].transform.GetChild(1).gameObject.SetActive(false);
+                var childObject = transform.GetChild(1).gameObject;
+                if (!childObject.activeSelf)
+                {
+
+                    GameManager.instance.jellyImagesList[0].transform.GetChild(1).gameObject.SetActive(true);
+                }
+                break;
         }
     }
     private void Update()
     {
-        ActivateLocked();
-
+        GameManager.instance.jellyImagesList[0].transform.GetChild(1).gameObject.SetActive(true);
     }
 }

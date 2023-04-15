@@ -11,6 +11,7 @@ public class OnTableJelly : MonoBehaviour
     // [SerializeField] private Color[] myColor;
     public Transform orderPoint;
     public bool isClickable = true;
+    public static OnTableJelly instance;
     public enum typeOfJelly
     {
         red,
@@ -21,11 +22,17 @@ public class OnTableJelly : MonoBehaviour
         green
     }
     [SerializeField] private typeOfJelly jellyType;
+
     private void Start()
     {
-
-        InvokeRepeating("ControlOrders", 1.1f, 2f);
+        GameManager.OnStateChanged += OnstateChanged;
+        InvokeRepeating("ControlOrders", 1f, 1.3f);
         anim = GetComponent<Animator>();
+
+    }
+    private  void OnDisable()
+    {
+          GameManager.OnStateChanged -= OnstateChanged;
     }
     private IEnumerator isClickableOnAgain()
     {
@@ -118,7 +125,7 @@ public class OnTableJelly : MonoBehaviour
                 .OnStart(() =>
                 {
 
-                    transform.DOScale(Vector3.zero, 1.5f).SetEase(Ease.InOutFlash);
+                    transform.DOScale(Vector3.zero, 1.8f).SetEase(Ease.InOutFlash);
                     transform.GetChild(0).gameObject.SetActive(true);
                 })
                 .OnComplete(() =>
@@ -130,11 +137,25 @@ public class OnTableJelly : MonoBehaviour
                     Destroy(orderToRemove);
                     GameManager.instance.isOrderGiven = false;
                     GameManager.instance.OrderCount--;
-                    if(GameManager.instance.OrderCount == 0)
-                    {
-                        GameManager.instance.ChangeGameState(GameState.Success);
-                    }
+
                 });
         }
     }
+    private void OnstateChanged(GameState newState)
+    {
+        switch (newState)
+        {
+
+
+            case GameState.Success:
+               CancelInvoke("ControlOrders");
+                break;
+
+            case GameState.Fail:
+               CancelInvoke("ControlOrders");
+                break;
+        }
+    }
+
+
 }

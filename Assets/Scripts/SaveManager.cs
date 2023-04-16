@@ -26,13 +26,13 @@ public class SaveManager : MonoBehaviour
             currentLevel = PlayerPrefs.GetInt("Level", 0);
             levelNumber = PlayerPrefs.GetInt("levelnumber", 1);
 
+
         }
-
-
     }
     private void Start()
     {
         GameManager.OnStateChanged += OnStateChanged;
+
     }
     void OnDisable()
     {
@@ -41,6 +41,7 @@ public class SaveManager : MonoBehaviour
     public void NextLevel()
     {
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
     private void OnStateChanged(GameState State)
     {
@@ -57,6 +58,7 @@ public class SaveManager : MonoBehaviour
                 }
                 PlayerPrefs.SetInt("Level", currentLevel);
                 PlayerPrefs.SetInt("levelnumber", levelNumber);
+
                 break;
         }
     }

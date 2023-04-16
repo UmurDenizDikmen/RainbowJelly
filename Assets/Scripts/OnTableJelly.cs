@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Data;
 
 public class OnTableJelly : MonoBehaviour
 {
@@ -30,9 +31,9 @@ public class OnTableJelly : MonoBehaviour
         anim = GetComponent<Animator>();
 
     }
-    private  void OnDisable()
+    private void OnDisable()
     {
-          GameManager.OnStateChanged -= OnstateChanged;
+        GameManager.OnStateChanged -= OnstateChanged;
     }
     private IEnumerator isClickableOnAgain()
     {
@@ -138,6 +139,7 @@ public class OnTableJelly : MonoBehaviour
                     GameManager.instance.isOrderGiven = false;
                     GameManager.instance.OrderCount--;
 
+
                 });
         }
     }
@@ -147,12 +149,12 @@ public class OnTableJelly : MonoBehaviour
         {
 
 
-            case GameState.Success:
-               CancelInvoke("ControlOrders");
+                case GameState.Success:
+                CancelInvoke("ControlOrders");
                 break;
 
             case GameState.Fail:
-               CancelInvoke("ControlOrders");
+                CancelInvoke("ControlOrders");
                 break;
         }
     }

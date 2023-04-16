@@ -16401,6 +16401,7 @@ MonoBehaviour:
   - {fileID: 7183369826310682726, guid: 89376bc6ec659834288d977ad3392536, type: 3}
   - {fileID: 911246292155043321, guid: 2ef660f4ca6a19348b5f8098d003f00e, type: 3}
   orderPoint: {fileID: 1375180053}
+  orderCount: 3
   orderList: []
   isOrderGiven: 0
   panelParent: {fileID: 943994193}
@@ -26520,6 +26521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentLevel: 0
   levelNumber: 1
+  orderNumber: 0
 --- !u!4 &538665446
 Transform:
   m_ObjectHideFlags: 0

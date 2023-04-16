@@ -13,12 +13,17 @@ public class UIController : MonoBehaviour
     [SerializeField] private Animator succesPanelAnim;
     public TextMeshProUGUI orderCountText;
     [SerializeField] private TextMeshProUGUI levelCountText;
-
+    public static UIController instance;
+    void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         GameManager.OnStateChanged += OnstateChanged;
         GameManager.onOrderCountChange += OnOrderCountChange;
-        levelCountText.text = PlayerPrefs.GetInt("levelnumber",SaveManager.instance.levelNumber).ToString();
+        levelCountText.text = PlayerPrefs.GetInt("levelnumber", SaveManager.instance.levelNumber).ToString();
+
 
     }
     private void OnDisable()
@@ -28,7 +33,7 @@ public class UIController : MonoBehaviour
     }
     private void OnOrderCountChange()
     {
-        orderCountText.text = GameManager.instance.OrderCount.ToString();
+         orderCountText.text = GameManager.instance.OrderCount.ToString();
     }
 
     private void OnstateChanged(GameState newState)
@@ -39,7 +44,7 @@ public class UIController : MonoBehaviour
                 successPanel.SetActive(false);
                 failPanel.SetActive(false);
                 inGamePanel.SetActive(true);
-                levelCountText.text = PlayerPrefs.GetInt("levelnumber",SaveManager.instance.levelNumber).ToString();
+                levelCountText.text = PlayerPrefs.GetInt("levelnumber", SaveManager.instance.levelNumber).ToString();
                 break;
             case GameState.InGame:
                 successPanel.SetActive(false);
@@ -52,7 +57,8 @@ public class UIController : MonoBehaviour
                 succesPanelAnim.Play("idle");
                 failPanel.SetActive(false);
                 inGamePanel.SetActive(false);
-                levelCountText.text = PlayerPrefs.GetInt("levelnumber",SaveManager.instance.levelNumber).ToString();
+                levelCountText.text = PlayerPrefs.GetInt("levelnumber", SaveManager.instance.levelNumber).ToString();
+
                 break;
             case GameState.Fail:
                 successPanel.SetActive(false);
